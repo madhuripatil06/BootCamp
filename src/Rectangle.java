@@ -1,19 +1,24 @@
+/*
+job of Rectangle:
+        - calculate any calculation involving height and/or width.
+                                            or
+        - calculate any property of the rectangle.
+ */
 public class Rectangle {
 
-    private int height;
-    private int width;
+    private double height;
+    private double width;
 
-    public Rectangle(int height, int width) {
+    public Rectangle(double height, double width) {
         this.height = height;
         this.width = width;
     }
 
-    public int calculateArea() {
+    public double calculateArea() {
         return height * width;
     }
 
-
-    public int calculatePerimeter() {
+    public double calculatePerimeter() {
         return  2*(height+width);
     }
 }
