@@ -9,7 +9,7 @@ public class Rectangle {
     private final double height;
     private final double width;
 
-    public Rectangle(double height, double width) {
+    private Rectangle(double height, double width) {
         this.height = height;
         this.width = width;
     }
@@ -20,5 +20,16 @@ public class Rectangle {
 
     public double calculatePerimeter() {
         return  2*(height+width);
+    }
+
+    public static Rectangle create(double height , double width) throws Exception {
+        if(!isValid(height) || !isValid(width))
+            throw new Exception("Plese enter valid height and width");
+        return new Rectangle(height,width);
+
+    }
+
+    private static boolean isValid(double value) {
+        return value > 0;
     }
 }
