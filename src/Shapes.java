@@ -1,4 +1,8 @@
+/*
+    job of the Shapes:
+            - make the contract for all the shapes.
+ */
 public interface Shapes {
-    int calculateArea();
-    int calculatePerimeter();
+    double calculateArea();
+    double calculatePerimeter();
 }

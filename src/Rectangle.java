@@ -1,13 +1,13 @@
 /*
 job of Rectangle:
-        - calculate any calculation involving height and/or width.
+        - calculate possible quantities which are related to rectangle based on height and/or width.
                                             or
-        - calculate any property of the rectangle.
+        - calculate any property of the rectangle using height and/or width.
  */
-public class Rectangle {
 
-    private double height;
-    private double width;
+public class Rectangle {
+    private final double height;
+    private final double width;
 
     public Rectangle(double height, double width) {
         this.height = height;
