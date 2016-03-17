@@ -24,7 +24,7 @@ public class Rectangle {
 
     public static Rectangle create(double height , double width) throws Exception {
         if(!isValid(height) || !isValid(width))
-            throw new Exception("Plese enter valid height and width");
+            throw new Exception("Please enter valid height and width");
         return new Rectangle(height,width);
 
     }
