@@ -10,10 +10,10 @@ import static org.junit.Assert.assertEquals;
 
 public class RectangleTest {
     @Rule
-    public ExpectedException thrown = ExpectedException.none();
+    public  ExpectedException thrown = ExpectedException.none();
 
     @Test
-    public void calculateAreaShouldReturnTheAreaOfTheRectangle() throws Exception {
+    public void calculateAreaShouldReturnTheAreaOfTheRectangle() throws IllegalArgumentException{
         Rectangle rectangle = Rectangle.create(10,5);
         double area = rectangle.calculateArea();
         double expected = 50;
@@ -21,7 +21,7 @@ public class RectangleTest {
     }
 
     @Test
-    public void calculatePerimeterShouldReturnThePerimeterOfTheRectangle() throws Exception {
+    public void calculatePerimeterShouldReturnThePerimeterOfTheRectangle() throws IllegalArgumentException{
         Rectangle rectangle = Rectangle.create(2.5,6.5);
         double  area = rectangle.calculatePerimeter();
         double expected = 18;
@@ -29,16 +29,16 @@ public class RectangleTest {
     }
 
     @Test
-    public void rectangleShouldNotBeCreateForTheHeightAndWidthZero() throws Exception {
-        thrown.expect(Exception.class);
-        thrown.expectMessage("Please enter valid height and width");
+    public void rectangleShouldNotBeCreateForHeightAndOrWidthZero() throws IllegalArgumentException{
+        thrown.expect(IllegalArgumentException.class);
+        thrown.expectMessage("Expected Positive height and width but got, height : 0.0 and width : 0.0");
         Rectangle.create(0,0);
     }
 
     @Test
-    public void rectangleShouldNotBeCreatedForTheNegativeHeightOrTheWidth() throws Exception {
-        thrown.expect(Exception.class);
-        thrown.expectMessage("Please enter valid height and width");
-        Rectangle.create(-2,9);
+    public void rectangleShouldNotBeCreatedForNegativeHeightOrWidth() throws IllegalArgumentException{
+        thrown.expect(IllegalArgumentException.class);
+        thrown.expectMessage("Expected Positive height and width but got, height : 2.0 and width : -9.0");
+        Rectangle.create(2,-9);
     }
 }
