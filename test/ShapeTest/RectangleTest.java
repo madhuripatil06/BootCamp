@@ -1,7 +1,8 @@
-/*
+package ShapeTest;/*
     job of RectangleTest :
             - test all the test cases for the Rectangle.
  */
+import Shape.Rectangle;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -14,7 +15,7 @@ public class RectangleTest {
 
     @Test
     public void calculateAreaShouldReturnTheAreaOfTheRectangle() throws IllegalArgumentException{
-        Rectangle rectangle = Rectangle.create(10,5);
+        Shape.Rectangle rectangle = Rectangle.create(10,5);
         double area = rectangle.calculateArea();
         double expected = 50;
         assertEquals(expected, area,0.0);

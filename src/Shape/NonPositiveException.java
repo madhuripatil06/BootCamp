@@ -1,3 +1,5 @@
+package Shape;
+
 public class NonPositiveException  extends Throwable{
 
     public NonPositiveException(double height , double width) {

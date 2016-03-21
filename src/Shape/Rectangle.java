@@ -1,4 +1,4 @@
-/*
+package Shape;/*
 job of Rectangle:
         - calculate attributes of rectangle.
  */
@@ -21,13 +21,8 @@ public class Rectangle {
     }
 
     public static Rectangle create(double height , double width) throws IllegalArgumentException{
-        if(!isValid(height) || !isValid(width))
+        if(!(height > 0) || !(width >0))
             throw new IllegalArgumentException("Expected Positive height and width but got, height : "+height+" and width : "+width);
         return new Rectangle(height,width);
-
-    }
-
-    private static boolean isValid(double value) {
-        return value > 0;
     }
 }

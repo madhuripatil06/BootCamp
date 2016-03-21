@@ -1,8 +1,10 @@
+package Shape;
+
 /*
         job of the Square :
                 - calculate attributes of the square.
  */
-public class Square extends Rectangle{
+public class Square extends Shape.Rectangle {
     private Square(double size) {
         super(size,size);
     }
