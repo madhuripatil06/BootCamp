@@ -57,8 +57,9 @@ public class BagTest {
     public void bagShouldBeAbleToHold12BlueBalls() {
         Bag bag = new Bag();
         Ball ball = new Ball(Color.BLUE);
-        for(int i = 0 ; i < 12 ; i++)
+        for(int i = 0 ; i < 12 ; i++) {
             assertTrue(bag.add(ball));
+        }
         boolean result = bag.add(ball);
         assertFalse(result);
     }

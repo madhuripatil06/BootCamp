@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Bag {
-    private final int capacity = 12;
-    private ArrayList<Ball> balls = new ArrayList<>(capacity);
+    private final int maxCapacity = 12;
+    private ArrayList<Ball> balls = new ArrayList<>(maxCapacity);
     private HashMap<String , Integer>counts;
 
     public Bag() {
@@ -16,20 +16,32 @@ public class Bag {
     }
 
     public boolean add(Ball ball) {
-        return isValid(ball);
+        if(isValid(ball))
+            return balls.add(ball);
+        return false;
+    }
+
+    private String getColor(Ball ball){
+        String[] colors = {"green","red","blue"};
+        for (String color : colors) {
+            if (ball.isOfColor(color))
+                return color;
+        }
+        return null;
     }
 
     private boolean isValid(Ball ball) {
+        int capacityForBlue = maxCapacity - (counts.get("green")+counts.get("red"));
+
+        String key = getColor(ball);
         HashMap<String, Integer> capacity = new HashMap<>();
         capacity.put("green",3);
         capacity.put("red",2*counts.get("green"));
-        int capacityForBlue = counts.get("green")+counts.get("red");
-        capacity.put("blue",(12 - capacityForBlue));
-        String key = ball.getColor();
+        capacity.put("blue", capacityForBlue);
+
         if(capacity.get(key) > counts.get(key)){
             int count = counts.get(key);
             counts.replace(key,count+1);
-            balls.add(ball);
             return true;
         }
         return false;

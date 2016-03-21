@@ -7,8 +7,7 @@ public class Ball {
         this.color = color;
     }
 
-    public String getColor(){
-        return color.toText();
+    public boolean isOfColor(String otherColor) {
+        return color.toText().equals(otherColor);
     }
-
 }
