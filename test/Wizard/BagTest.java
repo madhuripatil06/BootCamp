@@ -1,13 +1,18 @@
-package ServiceForKingdom;
+package Wizard;
 
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import static org.junit.Assert.*;
 
 public class BagTest {
 
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
+
     @Test
-    public void bagShouldHoldTheBalls() {
+    public void bagShouldHoldTheBalls() throws InvalidPositionException {
         Bag bag = new Bag();
         Ball green = new Ball(Color.GREEN);
         boolean result = bag.add(green);
@@ -16,7 +21,7 @@ public class BagTest {
 
 
     @Test
-    public void bagShouldNotAllowUserToAddMoreThan3GreenBalls() {
+    public void bagShouldNotAllowUserToAddMoreThan3GreenBalls() throws InvalidPositionException {
         Bag bag = new Bag();
         Ball greenBall = new Ball(Color.GREEN);
         boolean first =bag.add(greenBall);
@@ -25,12 +30,12 @@ public class BagTest {
         assertTrue(second);
         boolean third = bag.add(greenBall);
         assertTrue(third);
-        boolean result = bag.add(greenBall);
-        assertFalse(result);
+        thrown.expect(InvalidPositionException.class);
+        bag.add(greenBall);
     }
 
     @Test
-    public void bagShouldNotAllowUserToAddMoreThanDoubleOFGreenBalls() {
+    public void bagShouldNotAllowUserToAddMoreThanDoubleOFGreenBalls() throws InvalidPositionException {
         Bag bag  = new Bag();
         Ball greenBall = new Ball(Color.GREEN);
         Ball redBall = new Ball(Color.RED);
@@ -44,31 +49,31 @@ public class BagTest {
         assertTrue(fourthRed);
         boolean fifth = bag.add(redBall);
         assertTrue(fifth);
-        boolean six = bag.add(redBall);
-        assertFalse(six);
+        thrown.expect(InvalidPositionException.class);
+        bag.add(redBall);
     }
 
     @Test
-    public void bagShouldBeAbleToHold12BlueBalls() {
+    public void bagShouldBeAbleToHold12BlueBalls()throws InvalidPositionException  {
         Bag bag = new Bag();
         Ball ball = new Ball(Color.BLUE);
         for(int i = 0 ; i < 12 ; i++) {
             assertTrue(bag.add(ball));
         }
-        boolean result = bag.add(ball);
-        assertFalse(result);
+        thrown.expect(InvalidPositionException.class);
+        bag.add(ball);
     }
 
     @Test
-    public void bagShouldNotHoldFirstYellowBall() {
+    public void bagShouldNotHoldFirstYellowBall() throws InvalidPositionException {
         Bag bag = new Bag();
         Ball yellowBall = new Ball(Color.YELLOW);
-        boolean result = bag.add(yellowBall);
-        assertFalse(result);
+        thrown.expect(InvalidPositionException.class);
+        bag.add(yellowBall);
     }
 
     @Test
-    public void bagShouldBeAbleToHoldMaximum40percentOfYellowBalls() {
+    public void bagShouldBeAbleToHoldMaximum40percentOfYellowBalls()throws InvalidPositionException  {
         Bag bag = new Bag();
         Ball yellowBall = new Ball(Color.YELLOW);
         Ball blueBall = new Ball(Color.BLUE);
@@ -79,23 +84,18 @@ public class BagTest {
     }
 
     @Test
-    public void bagShouldBeAbleToHoldTheSummaryAtAnyPointOfTime() {
+    public void bagShouldBeAbleToHoldTheSummaryAtAnyPointOfTime()throws InvalidPositionException  {
         Bag bag = new Bag();
         Ball blueBall = new Ball(Color.BLUE);
         Ball ball = new Ball(Color.GREEN);
         bag.add(blueBall);
         String summary = bag.getSummary();
-        String expectedSummary = "Bag : 1 Balls  \nBLUE : 1 ";
+        String expectedSummary = "Bag : 1 Balls  \nBLUE : 1\n";
         assertEquals(expectedSummary ,summary);
         bag.add(blueBall);
-        String expectedSummary2 = "Bag : 2 Balls  \nBLUE : 2";
+        String expectedSummary2 = "Bag : 2 Balls  \nBLUE : 2\n";
         String summary2 = bag.getSummary();
         System.out.println(summary2);
         assertEquals(expectedSummary2 ,summary2);
     }
-
-//    @Test
-//    public void bagShouldProvideTheSummary() {
-
-//    }
 }

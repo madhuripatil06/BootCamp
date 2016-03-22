@@ -1,14 +1,14 @@
-package ServiceForKingdom;
+package Wizard;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Bag {
     private final int maxCapacity = 12;
+    private final int maxCapacityForGreen = 3;
     private Ball previousBall;
-    private String data;
-    private int totalNumberOfBalls;
-    private String summary;
+    private String data = "";
+    private String summary = "";
     private ArrayList<Ball> balls = new ArrayList<>(maxCapacity);
     private HashMap<Color , Integer>counts;
 
@@ -18,32 +18,40 @@ public class Bag {
         counts.put(Color.GREEN,0);
         counts.put(Color.BLUE,0);
         counts.put(Color.YELLOW,0);
-        this.summary = "";
-        this.totalNumberOfBalls = 0;
-        this.data = "";
-        this.previousBall = null;
     }
 
-    public boolean add(Ball ball) {
+    public boolean add(Ball ball) throws InvalidPositionException {
         if(isValid(ball)) {
             setSummary(ball);
             return balls.add(ball);
         }
-        return false;
+        throw new InvalidPositionException();
     }
 
     private void setSummary(Ball ball) {
+//        String summary1 = "Bag : "+(getTotalNumberOfBalls())+" Balls  \n";
+//        for (Ball aBall : balls) {
+//            int count1 = 1 ;
+//            if(previousBall != null && previousBall.isOfColor(getColor(aBall)))
+//                count1 += 1;
+//            summary += aBall.toString() + count1;
+//            Ball previousBall = ball;
+//        }
+//        System.out.println(" ------ " +summary1);
+
+
         int count = 1;
         if(previousBall != null && previousBall.isOfColor(getColor(ball))) {
-            data = data.substring(0,data.length()-3);
+            int countLength = 3;
+            data = data.substring(0,data.length()-countLength);
             count += 1;
-            data += " " +count;
+            data += " " +count +"\n";
         }
         else {
-            data += getColor(ball).toString() + " : " + count + " ";
+            data += getColor(ball).toString() + " : " + count + "\n";
             previousBall = ball;
         }
-        summary ="Bag : "+(totalNumberOfBalls+1)+" Balls  \n"+data;
+        summary ="Bag : "+(getTotalNumberOfBalls())+" Balls  \n"+data;
     }
 
     private Color getColor(Ball ball){
@@ -62,26 +70,24 @@ public class Bag {
         return 2*counts.get(Color.GREEN)-1;
     }
 
-    private void getTotalNumberOfBalls(){
-        totalNumberOfBalls =  counts.get(Color.BLUE)+counts.get(Color.RED)+counts.get(Color.GREEN)+counts.get(Color.YELLOW);
+    private int getTotalNumberOfBalls(){
+        return counts.get(Color.BLUE)+counts.get(Color.RED)+counts.get(Color.GREEN)+counts.get(Color.YELLOW);
     }
 
     private boolean isValid(Ball ball) {
-        getTotalNumberOfBalls();
-        int capacityForYellow = (int)((totalNumberOfBalls+1)*(40d/100));
+        int capacityForYellow = (int)((getTotalNumberOfBalls()+1)*(40d/100));
         int capacityForBlue = maxCapacity - (counts.get(Color.GREEN)+counts.get(Color.RED));
         int capacityForRed = setCapacityForRed();
-        Color key = getColor(ball);
+        Color color = getColor(ball);
 
         HashMap<Color, Integer> capacity = new HashMap<>();
-        capacity.put(Color.GREEN,3);
+        capacity.put(Color.GREEN,maxCapacityForGreen);
         capacity.put(Color.RED,capacityForRed);
         capacity.put(Color.BLUE, capacityForBlue);
         capacity.put(Color.YELLOW, capacityForYellow);
-
-        if(capacity.get(key) > counts.get(key)){
-            int count = counts.get(key);
-            counts.replace(key,count+1);
+        if(capacity.get(color) > counts.get(color)){
+            int count = counts.get(color);
+            counts.replace(color,count+1);
             return true;
         }
         return false;

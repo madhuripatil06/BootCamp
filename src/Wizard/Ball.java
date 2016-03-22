@@ -1,4 +1,4 @@
-package ServiceForKingdom;
+package Wizard;
 
 public class Ball {
     private Color color;
