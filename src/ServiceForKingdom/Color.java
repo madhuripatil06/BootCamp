@@ -3,7 +3,8 @@ package ServiceForKingdom;
 public enum Color {
     GREEN("green"),
     RED("red"),
-    BLUE("blue");
+    BLUE("blue"),
+    YELLOW("yellow");
 
     private String color;
 
