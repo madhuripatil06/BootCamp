@@ -37,20 +37,16 @@ public class BagTest {
         Ball redBall = new Ball(Color.RED);
         boolean first = bag.add(greenBall);
         assertTrue(first);
-        boolean second = bag.add(redBall);
+        boolean second = bag.add(greenBall);
         assertTrue(second);
         boolean third = bag.add(redBall);
         assertTrue(third);
         boolean fourthRed = bag.add(redBall);
-        assertFalse(fourthRed);
-        boolean fourth = bag.add(greenBall);
-        assertTrue(fourth);
+        assertTrue(fourthRed);
         boolean fifth = bag.add(redBall);
         assertTrue(fifth);
         boolean six = bag.add(redBall);
-        assertTrue(six);
-        boolean seventh = bag.add(redBall);
-        assertFalse(seventh);
+        assertFalse(six);
     }
 
     @Test
